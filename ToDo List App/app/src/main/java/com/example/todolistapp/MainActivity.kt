@@ -4,17 +4,25 @@ import android.annotation.SuppressLint
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
+import androidx.compose.foundation.Image
+import androidx.compose.foundation.border
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.material.*
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Add
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.todolistapp.ui.theme.ToDoListAppTheme
+
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -24,7 +32,7 @@ class MainActivity : ComponentActivity() {
                 // A surface container using the 'background' color from the theme
                 Surface(
                     modifier = Modifier.fillMaxSize(),
-                    color = MaterialTheme.colors.background
+                    color = Color.White
                 ) {
                     ToDoList()
                 }
@@ -35,66 +43,81 @@ class MainActivity : ComponentActivity() {
 
 @Composable
 fun ToDoItem(toDo: String, onValueChange: (String) -> Unit, onButtonClick: () -> Unit) {
-    Row(
+    Column(
         modifier = Modifier
             .fillMaxWidth()
-            .padding(start = 10.dp, top = 20.dp, end = 10.dp, bottom = 40.dp),
-        horizontalArrangement = Arrangement.Center,
-        verticalAlignment = Alignment.CenterVertically
+            .padding(start = 10.dp, top = 20.dp, end = 10.dp, bottom = 10.dp),
+        verticalArrangement = Arrangement.Center,
+        horizontalAlignment = Alignment.Start,
     ) {
-        TextField(
-            value = toDo,
-            onValueChange = onValueChange,
-            label = {Text("Add to do item")},
-            singleLine = true,
-            modifier = Modifier
-                .height(60.dp)
-                .width(200.dp)
+        Text(text = "Add to do item",
+            color = Color.Black,
+            fontSize = 30.sp,
+            fontWeight = FontWeight.Bold,
+            modifier = Modifier.padding(start = 25.dp)
         )
-        Spacer(modifier = Modifier.padding(20.dp))
-        Button(
-            onClick = onButtonClick,
+        Row(
             modifier = Modifier
-                .height(40.dp)
-                .width(70.dp),
+                .fillMaxWidth()
+                .padding(start = 10.dp, top = 20.dp, end = 10.dp, bottom = 10.dp),
+            horizontalArrangement = Arrangement.Center,
+            verticalAlignment = Alignment.CenterVertically
         ) {
-            Text(text = "Add")
+            TextField(
+                value = toDo,
+                onValueChange = onValueChange,
+                //label = {Text("Add to do item", color = Color.Black)},
+                singleLine = true,
+                modifier = Modifier
+                    .height(60.dp)
+                    .width(240.dp)
+                    .border(1.dp, Color.Black)
+            )
+            Spacer(modifier = Modifier.padding(10.dp))
+            FloatingActionButton(
+                onClick = onButtonClick,
+                backgroundColor = Color.Cyan,
+                contentColor = Color.Red
+            ) {
+                Icon(Icons.Filled.Add,"")
+            }
         }
     }
 }
 
 @Composable
 fun ToDoListOneItem(value : String, onButtonClick: (String) -> Unit){
-    Row(
+    Box(
         modifier = Modifier
-            .fillMaxWidth()
-            .padding(start = 10.dp, top = 20.dp, end = 10.dp),
-        horizontalArrangement = Arrangement.Start,
-        verticalAlignment = Alignment.Top
-    ) {
+            .width(300.dp)
+            .padding(start = 10.dp, top = 20.dp, end = 10.dp)
+            .border(1.dp, Color.Black)
+    ){
         Text(
             text = value,
             modifier = Modifier
-                .height(40.dp)
-                .width(200.dp)
+                .height(30.dp)
+                .width(300.dp)
+                .padding(start = 5.dp),
+            fontSize = 20.sp,
+            textAlign = TextAlign.Start
         )
-        Button(
-            onClick = { onButtonClick(value) },
+        Image(
+            painter = painterResource(id = R.drawable.delete),
+            contentDescription = null,
             modifier = Modifier
-                .height(40.dp)
-                .width(90.dp)
-        ) {
-            Text(text = "Delete")
-        }
+                .align(Alignment.CenterEnd)
+                .clickable(
+                    enabled = true,
+                    onClick = {onButtonClick(value)}
+                )
+                .padding(end = 2.dp)
+        )
     }
 }
 
 @Composable
 fun ToDoItemList(toDoList : ArrayList<String>, onClick: (String) -> Unit) {
-//    val onClick: (value:String) -> Unit = {
-//        toDoList.remove(it)
-//    }
-
     Column(
         modifier = Modifier
             .fillMaxWidth()
