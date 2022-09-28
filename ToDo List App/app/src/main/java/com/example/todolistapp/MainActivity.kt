@@ -66,7 +66,7 @@ fun ToDoItem(toDo: String, onValueChange: (String) -> Unit, onButtonClick: () ->
             TextField(
                 value = toDo,
                 onValueChange = onValueChange,
-                //label = {Text("Add to do item", color = Color.Black)},
+//                label = {Text("Add to do item", color = Color.Black)},
                 singleLine = true,
                 modifier = Modifier
                     .height(60.dp)
