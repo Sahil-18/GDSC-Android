@@ -1,0 +1,24 @@
+<resources>
+    <string name="app_name">Third Thursday Trivia</string>
+    <string name="search_placeholder">Restaurant name or a dish</string>
+<!--    Restaurants Details    -->
+    <string name="restaurant1">Haldiram</string>
+    <string name="rating1">4.4</string>
+    <string name="cost1">150</string>
+    <string name="description1">Sweets, Bakery</string>
+
+    <string name="restaurant2">Pind Punjabi</string>
+    <string name="description2">North Indian, Chinese</string>
+    <string name="rating2">3.6</string>
+    <string name="cost2">100</string>
+
+    <string name="restaurant3">Get A Whey</string>
+    <string name="rating3">3.9</string>
+    <string name="cost3">150</string>
+    <string name="description3">Desserts, Ice Cream</string>
+
+    <string name="restaurant4">KFC</string>
+    <string name="rating4">3.9</string>
+    <string name="cost4">200</string>
+    <string name="description4">American, Snacks</string>
+</resources>
